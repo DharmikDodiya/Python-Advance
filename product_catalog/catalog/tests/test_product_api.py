@@ -32,7 +32,7 @@ class ProductAPITestCase(TestCase):
     def test_create_product_valid(self):
         response = self.client.post('/api/products/', self.valid_payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['name'], 'New Product')
+        self.assertEqual(response.data['data']['name'], 'New Product')
 
     def test_create_product_invalid(self):
         response = self.client.post('/api/products/', self.invalid_payload, format='json')
@@ -41,7 +41,7 @@ class ProductAPITestCase(TestCase):
     def test_retrieve_product(self):
         response = self.client.get(f'/api/products/{self.product.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['name'], 'Test Product')
+        self.assertEqual(response.data['data']['name'], 'Test Product')
 
     def test_update_product_valid(self):
         updated_data = {
@@ -52,7 +52,7 @@ class ProductAPITestCase(TestCase):
         }
         response = self.client.put(f'/api/products/{self.product.id}/', updated_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['name'], 'Updated Product')
+        self.assertEqual(response.data['data']['name'], 'Updated Product')
 
     def test_update_product_invalid(self):
         response = self.client.put(f'/api/products/{self.product.id}/', self.invalid_payload, format='json')

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Blog
 from .forms import PostForm
-from .forms import RegisterForm
+from .forms import CustomUserCreationForm
 from django.contrib.auth import login
 
 def home(request):
@@ -39,11 +39,15 @@ def post_delete(request, pk):
 
 def register(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)  # Auto login after registration
-            return redirect('home')  # or any page you want
-    else:
-        form = RegisterForm()
+            return redirect('home')  # Redirect to the home page or dashboard
+        else:
+            # Display the form with errors
+            return render(request, 'blog/register.html', {'form': form})
+
+    # GET request, render empty form
+    form = CustomUserCreationForm()
     return render(request, 'blog/register.html', {'form': form})

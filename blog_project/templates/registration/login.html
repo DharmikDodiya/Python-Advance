@@ -1,8 +1,51 @@
 {% extends 'blog/base.html' %}
+{% load widget_tweaks %}
+
 {% block content %}
-<h2>Login</h2>
-<form method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <!-- Title -->
+            <h2 class="text-center mb-4" style="font-weight: bold; font-size: 2rem;">Login</h2>
+
+            <!-- Error messages -->
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <!-- Login Form -->
+            <form method="post" novalidate>
+                {% csrf_token %}
+                
+                <!-- Username Field -->
+                <div class="mb-4">
+                    <label for="username" class="form-label" style="font-size: 1rem; color: #333;">Username</label>
+                    <input type="text" name="{{ form.username.name }}" class="form-control" placeholder="Enter your user name">
+                </div>
+                
+                <!-- Password Field -->
+                <div class="mb-4">
+                    <label for="password" class="form-label" style="font-size: 1rem; color: #333;">Password</label>
+                    <input type="text" name="{{ form.password.name }}" placeholder="Enter password" class="form-control">
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary w-100 py-2" style="background-color: #283bf1; border-radius: 5px; font-size: 1.1rem;">Login</button>
+            </form>
+            
+            <!-- Register Link -->
+            <p class="text-center mt-3">
+                Don't have an account? <a href="{% url 'register' %}" style="color: #283bf1; font-weight: bold;">Register</a>
+            </p>
+        </div>
+    </div>
+</div>
 {% endblock %}
