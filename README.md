@@ -34,7 +34,7 @@ To install Python and pip, follow the steps below:
 
 4. **Install dependencies**:
 
-    - `pip freeze > requirements.txt`
+    - `pip install -r requirements.txt`
 
 5. **Set up database credentials and run the project**
     
@@ -84,7 +84,7 @@ To install Python and pip, follow the steps below:
 
 4. **Install dependencies**:
 
-    - `pip freeze > requirements.txt`
+    - `pip install -r requirements.txt`
 
 5. **Set up database credentials and run the project**
     
