@@ -96,7 +96,6 @@ To install Python and pip, follow the steps below:
       
     - ![image](https://github.com/user-attachments/assets/b963896b-d5a6-4b01-8136-461fce8796c2)
 
-
 7. **Deactivate the virtual environment** when you're done:
 
     - `deactivate`
